@@ -176,8 +176,9 @@ function playerRotate(dir) {
 }
 
 let dropCounter = 0;
-let dropInterval = 1000;
+let dropInterval = 500;
 let lastTime = 0;
+let paused = false;
 
 function update(time = 0) {
     const deltaTime = time - lastTime;
@@ -187,7 +188,9 @@ function update(time = 0) {
     }
     lastTime = time;
     draw();
-    requestAnimationFrame(update);
+    if (!paused) {
+        requestAnimationFrame(update);
+    }
 }
 
 function updateScore() {
@@ -197,14 +200,19 @@ function updateScore() {
 document.addEventListener("keydown", (event) => {
     if (event.keyCode === 37) {
         playerMove(-1);
+        //left arrow move left
     } else if (event.keyCode === 39) {
         playerMove(1);
+        //right arrow move right
     } else if (event.keyCode === 40) {
         playerDrop();
+        //down arrow move down
     } else if (event.keyCode === 81) {
         playerRotate(-1);
-    } else if (event.keyCode === 87) {
+        //Q key rotate left
+    } else if (event.keyCode === 69) {
         playerRotate(1);
+        //E key rotate right
     }
 });
 
@@ -229,3 +237,40 @@ const player = {
 playerReset();
 updateScore();
 update();
+
+const easy = document.getElementById("easy");
+const medium = document.getElementById("medium");
+const hard = document.getElementById("hard");
+const pause = document.getElementById("pause");
+
+easy.addEventListener("click", () => {
+    dropInterval = 1000;
+    easy.classList.add("active");
+    medium.classList.remove("active");
+    hard.classList.remove('active');
+});
+medium.addEventListener("click", () => {
+    dropInterval = 500;
+    easy.classList.remove("active");
+    medium.classList.add("active");
+    hard.classList.remove('active');
+});
+hard.addEventListener("click", () => {
+    dropInterval = 225;
+    easy.classList.remove("active");
+    medium.classList.remove("active");
+    hard.classList.add('active');
+});
+
+pause.addEventListener("click", () => {
+    if (pause.classList.contains("pause-active")) {
+        pause.classList.remove("pause-active");
+        pause.classList.add("pause-inactive");
+        paused = false;
+        update();
+    } else {
+        pause.classList.remove("pause-inactive");
+        pause.classList.add("pause-active");
+        paused = true;
+    }
+});

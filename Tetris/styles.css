@@ -10,3 +10,73 @@ canvas {
     border: solid 0.2em #fff;
     height: 90vh;
 }
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-container .left {
+    margin: 0 25px 0 auto;
+}
+
+.flex-container .right {
+    margin: 0 auto 0 30px;
+}
+
+.flex-container .right .header {
+    margin-bottom: 100px;
+}
+
+.flex-container .right .header h1 {
+    font-size: 64px;
+}
+
+.flex-container .right .header h3 {
+    font-size: 36px;
+    font-weight: 300;
+}
+
+.flex-container .right .controls {
+    font-size: 28px;
+}
+
+.flex-container .right .buttons {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 50% auto;
+    margin-top: 200px;
+    gap: 8px;
+}
+
+.flex-container .right .buttons button {
+    width: 100%;
+    height: 100%;
+    font-size: 24px;
+    border: solid 1px #fff;
+    border-radius: 8px;
+}
+
+.active {
+    background: #3A5A40;
+    color: #fff;
+}
+
+.flex-container .right .buttons button:not(:last-of-type):hover {
+    background: #A3B18A;
+}
+
+.pause-inactive {
+    background: lightcoral;
+}
+
+.flex-container .right .buttons button:last-of-type:hover {
+    background: pink;
+}
+
+.pause-active {
+    background: red;
+    color: #fff;
+}
